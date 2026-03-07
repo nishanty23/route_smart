@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:osmdroid="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.nishantyadav.routesmart.view.RouteCanvasView
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_height="400dp"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnFetchRoute"
-        android:text="Save Route"
+        <EditText
+            android:id="@+id/etStart"
+            android:hint="Start location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etEnd"
+            android:hint="Destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnRoute"
+            android:text="Find Route"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_below="@id/btnRoute"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        osmdroid:tileSource="MAPNIK"/>
+
+</RelativeLayout>
