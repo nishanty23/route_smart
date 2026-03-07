@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmdroid="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/topPanel"
         android:orientation="vertical"
-        android:background="#FFFFFF"
+        android:background="#CCFFFFFF"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/etStart"
-            android:hint="Start location"
+            android:hint="Start Location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -35,9 +34,8 @@
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
-        android:layout_below="@id/btnRoute"
+        android:layout_below="@id/topPanel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        osmdroid:tileSource="MAPNIK"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
