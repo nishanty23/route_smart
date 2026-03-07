@@ -5,14 +5,19 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.RouteSmart"
         android:label="RouteSmart">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjE1YzQwMDNmY2QwNjQ0OTk4YmVhNjdkM2RhYzI2MDc0IiwiaCI6Im11cm11cjY0In0="/>
 
         <activity
             android:name="com.nishantyadav.routesmart.MapActivity"
