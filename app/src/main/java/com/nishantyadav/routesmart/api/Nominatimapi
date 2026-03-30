@@ -1,0 +1,50 @@
+package com.nishantyadav.routesmart.api
+
+import org.json.JSONArray
+import org.osmdroid.util.GeoPoint
+import java.net.URL
+import java.net.URLEncoder
+
+/**
+ * NominatimApi — Converts place names to GPS coordinates (geocoding).
+ * Uses OpenStreetMap's free Nominatim service.
+ *
+ * ⚠️ Must be called from a background thread (IO dispatcher).
+ */
+object NominatimApi {
+
+    private const val BASE_URL = "https://nominatim.openstreetmap.org/search"
+
+    /**
+     * Geocode a place name into a GeoPoint.
+     * Returns null if nothing is found.
+     *
+     * Example: geocode("Connaught Place, Delhi") → GeoPoint(28.63, 77.22)
+     */
+    fun geocode(query: String): GeoPoint? {
+        return try {
+            val encodedQuery = URLEncoder.encode(query, "UTF-8")
+            val url = "$BASE_URL?q=$encodedQuery&format=json&limit=1"
+
+            val connection = URL(url).openConnection().apply {
+                setRequestProperty("User-Agent", "RouteSmart-App/1.0")
+                connectTimeout = 8000
+                readTimeout    = 8000
+            }
+
+            val response = connection.getInputStream().bufferedReader().readText()
+            val jsonArray = JSONArray(response)
+
+            if (jsonArray.length() == 0) return null
+
+            val first = jsonArray.getJSONObject(0)
+            val lat = first.getDouble("lat")
+            val lon = first.getDouble("lon")
+
+            GeoPoint(lat, lon)
+        } catch (e: Exception) {
+            android.util.Log.e("NominatimApi", "Geocoding failed: ${e.message}")
+            null
+        }
+    }
+}
