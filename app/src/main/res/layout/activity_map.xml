@@ -1,41 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    activity_map.xml
+    Modern navigation UI with:
+    - Floating search bar
+    - Map with loader overlay
+    - Floating action buttons
+    - Bottom sheet for route info + suggestions
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/topPanel"
-        android:orientation="vertical"
-        android:background="#CCFFFFFF"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/etStart"
-            android:hint="Start Location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/etEnd"
-            android:hint="Destination"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnRoute"
-            android:text="Find Route"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+ 
+    <!-- ── Map (full screen background) ── -->
     <org.osmdroid.views.MapView
-        android:id="@+id/map"
-        android:layout_below="@id/topPanel"
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</RelativeLayout>
+        android:layout_height="match_parent" />
+ 
+    <!-- ── Map Loading Overlay ── -->
+    <FrameLayout
+        android:id="@+id/mapLoader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/loader_bg"
+        android:visibility="visible">
+ 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp">
+ 
+            <ProgressBar
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:indeterminateTint="@color/primary_blue" />
+ 
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading map…"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins_medium" />
+        </LinearLayout>
+    </FrameLayout>
+ 
+    <!-- ── Floating Search Card (top) ── -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="top"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="@color/card_bg">
+ 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+ 
+            <!-- App title row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+ 
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_route_logo"
+                    android:contentDescription="RouteSmart" />
+ 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="RouteSmart"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_semibold" />
+ 
+                <!-- Routing spinner (shown during API calls) -->
+                <ProgressBar
+                    android:id="@+id/routingLoader"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/primary_blue" />
+            </LinearLayout>
+ 
+            <!-- Start input -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+ 
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_green" />
+ 
+                <EditText
+                    android:id="@+id/etStart"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingHorizontal="14dp"
+                    android:hint="From — start location"
+                    android:hintTextColor="@color/text_hint"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
+ 
+            <!-- Dotted connector line -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/divider_color" />
+ 
+            <!-- Destination input -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="14dp">
+ 
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_red" />
+ 
+                <EditText
+                    android:id="@+id/etDestination"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingHorizontal="14dp"
+                    android:hint="To — destination"
+                    android:hintTextColor="@color/text_hint"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
+ 
+            <!-- Get Route button -->
+            <Button
+                android:id="@+id/btnGetRoute"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Get Route"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:backgroundTint="@color/primary_blue"
+                android:stateListAnimator="@null"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+ 
+    <!-- ── Right-side FAB column ── -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:orientation="vertical"
+        android:layout_marginEnd="12dp"
+        android:gravity="center">
+ 
+        <!-- My Location FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnMyLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_my_location"
+            android:contentDescription="My Location"
+            app:backgroundTint="@color/card_bg"
+            app:tint="@color/primary_blue"
+            app:fabSize="mini" />
+ 
+        <!-- Nearby Places FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnNearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_nearby"
+            android:contentDescription="Nearby Places"
+            app:backgroundTint="@color/card_bg"
+            app:tint="@color/accent_orange"
+            app:fabSize="mini" />
+ 
+        <!-- Nearby loader -->
+        <ProgressBar
+            android:id="@+id/nearbyLoader"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:indeterminateTint="@color/accent_orange" />
+    </LinearLayout>
+ 
+    <!-- ── Bottom Sheet ── -->
+    <LinearLayout
+        android:id="@+id/bottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_bottom_sheet"
+        android:paddingTop="8dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+ 
+        <!-- Drag handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_drag_handle" />
+ 
+        <!-- Route summary row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+ 
+            <!-- Distance card -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+ 
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- km"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/poppins_semibold" />
+ 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distance"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_regular" />
+            </LinearLayout>
+ 
+            <!-- Vertical divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/divider_color"
+                android:layout_marginHorizontal="16dp" />
+ 
+            <!-- Duration card -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+ 
+                <TextView
+                    android:id="@+id/tvDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- min"
+                    android:textColor="@color/accent_orange"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/poppins_semibold" />
+ 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Duration"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_regular" />
+            </LinearLayout>
+ 
+            <!-- Start Navigation Button -->
+            <Button
+                android:id="@+id/btnStartNavigation"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:text="Navigate"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:backgroundTint="@color/route_blue"
+                app:cornerRadius="10dp"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+ 
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            android:layout_marginHorizontal="20dp" />
+ 
+        <!-- Suggestions label -->
+        <TextView
+            android:id="@+id/suggestionsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:text="📍 Places Along Route"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:visibility="gone" />
+ 
+        <!-- Horizontal suggestions list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/suggestionsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="20dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="gone"
+            tools:listitem="@layout/item_place_suggestion" />
+ 
+    </LinearLayout>
+ 
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
