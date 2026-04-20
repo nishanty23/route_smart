@@ -1,0 +1,49 @@
+package com.nishantyadav.routesmart.ui
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.nishantyadav.routesmart.databinding.ItemRecommendationBinding
+import com.nishantyadav.routesmart.model.RecommendedPlace
+
+class RecommendationsAdapter(
+    private val onPlaceClick: (RecommendedPlace) -> Unit
+) : RecyclerView.Adapter<RecommendationsAdapter.PlaceViewHolder>() {
+
+    private val items = mutableListOf<RecommendedPlace>()
+
+    fun submitList(newItems: List<RecommendedPlace>) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
+    inner class PlaceViewHolder(
+        private val binding: ItemRecommendationBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(place: RecommendedPlace) {
+            binding.tvPlaceName.text = place.name
+            binding.tvPlaceCategory.text = place.category.replaceFirstChar { it.uppercase() }
+            binding.tvPlaceDescription.text = place.description
+            binding.tvDistance.text = String.format("%.1f km away", place.distanceKm)
+
+            binding.root.setOnClickListener {
+                onPlaceClick(place)
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
+        val binding = ItemRecommendationBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return PlaceViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+}
