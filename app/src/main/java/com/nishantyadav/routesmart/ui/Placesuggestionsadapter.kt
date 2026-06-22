@@ -1,6 +1,12 @@
 package com.nishantyadav.routesmart.ui
 
-
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.nishantyadav.routesmart.databinding.ItemPlaceSuggestionBinding
+import com.nishantyadav.routesmart.model.NearbyPlace
 
 /**
  * PlaceSuggestionsAdapter — shows smart route suggestions in a horizontal RecyclerView.
