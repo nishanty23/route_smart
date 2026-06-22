@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nishantyadav.routesmart.databinding.ItemRecommendationBinding
 import com.nishantyadav.routesmart.model.RecommendedPlace
 
-
+class RecommendationsAdapter(
+    private val onPlaceClick: (RecommendedPlace) -> Unit
+) : RecyclerView.Adapter<RecommendationsAdapter.PlaceViewHolder>() {
 
     private val items = mutableListOf<RecommendedPlace>()
 
