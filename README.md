@@ -145,32 +145,6 @@ Map UI + Recommendations + Chatbot
 
 ---
 
-# 📂 Project Structure
-
-```text
-RouteSmart
-│
-├── activities/
-│   └── MapActivity.kt
-│
-├── api/
-│   ├── OsrmApi.kt
-│   ├── OverpassApi.kt
-│   └── NominatimApi.kt
-│
-├── adapter/
-│   └── RecommendationsAdapter.kt
-│
-├── model/
-│   ├── RouteInfo.kt
-│   ├── NearbyPlace.kt
-│   └── RecommendedPlace.kt
-│
-└── res/
-```
-
----
-
 # 📊 Engineering Challenges Solved
 
 ### Problem:
@@ -207,20 +181,6 @@ Traditional navigation apps lack contextual intelligence.
 - Problem Solving
 - Software Architecture
 - Mobile Application Development
-
----
-
-# 📸 Application Screenshots
-
-> Add screenshots here.
-
-| Home | Navigation | Recommendations |
-|------|------------|----------------|
-| Image | Image | Image |
-
-| Chatbot | Voice Assistant |
-|---------|----------------|
-| Image | Image |
 
 ---
 
@@ -276,8 +236,8 @@ Android Developer | Full Stack Developer | Cloud Enthusiast
 # 📬 Connect With Me
 
 - GitHub: https://github.com/nishanty23
-- LinkedIn: Add your LinkedIn Profile
-- Email: Add your Email
+- LinkedIn: https://www.linkedin.com/in/nishant-yadav-/
+- Email: nishantyadav23082004@gmail.com
 
 ---
 
@@ -292,4 +252,3 @@ If you found this project interesting, consider giving it a star.
   Intelligent Navigation for Modern Travel
 </p>
 </div>
-🔥 Extra Suggestion
