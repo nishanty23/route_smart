@@ -197,18 +197,6 @@ Add your demo video link here.
 
 ---
 
-## 👨‍💻 Developer
-
-**Nishant Yadav**
-B.Tech Computer Science Engineering (Google Cloud Platform Specialization)
-
-* Android Development
-* Kotlin Development
-* Google Cloud Platform
-* Mobile Application Development
-
----
-
 ## ⭐ Support
 
 If you found this project useful, please consider giving it a **⭐ Star** on GitHub.
