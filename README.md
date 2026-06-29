@@ -1,3 +1,11 @@
+
+
+https://github.com/user-attachments/assets/b6327497-cc7c-4433-a2da-565e9a02489b
+
+
+
+
+
 # RouteSmart 🗺️📱
 
 RouteSmart is an intelligent Android navigation assistant developed using Kotlin and XML. Unlike traditional navigation applications that only provide directions, RouteSmart combines navigation with contextual travel intelligence. It offers route generation, nearby place recommendations, GPS tracking, voice interaction, and a travel chatbot to help users during their journeys.
@@ -173,6 +181,10 @@ Watch the complete application workflow below:
 | ------------------------------ |
 
 Add your demo video link here.
+
+
+https://github.com/user-attachments/assets/66e652b0-b60e-4768-b60b-fc3ee695ec47
+
 
 ---
 
