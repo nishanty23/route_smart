@@ -1,11 +1,3 @@
-
-
-https://github.com/user-attachments/assets/b6327497-cc7c-4433-a2da-565e9a02489b
-
-
-
-
-
 # RouteSmart 🗺️📱
 
 RouteSmart is an intelligent Android navigation assistant developed using Kotlin and XML. Unlike traditional navigation applications that only provide directions, RouteSmart combines navigation with contextual travel intelligence. It offers route generation, nearby place recommendations, GPS tracking, voice interaction, and a travel chatbot to help users during their journeys.
@@ -167,9 +159,17 @@ The project was tested using:
 
 ## 📷 Application Walkthrough
 
-| Login Page                                         | Route                                        | Nearby Places                                         |
+| Login Page                                         | Route Planning                                       | Route Navigation                                         |
 | ----------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------ |
-| <img src="Screenshots/Login-Page.jpeg" width="250"> | <img src="Screenshots/Route-Page.jpeg" width="250"> | <img src="Screenshots/Nearby-Places.jpeg" width="250"> |
+| <img src="Screenshots/Login-Page.jpeg" width="250"> | <img src="Screenshots/Route-Page-Without-Nearby-Places.jpeg" width="250"> | <img src="Screenshots/Route-Page.jpeg" width="250"> |
+
+| Route with Nearby Places                                         | Nearby Places                                        | AI Travel Assistant                                         |
+| ----------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------ |
+| <img src="Screenshots/Route-Page-With-Nearby-Places.jpeg" width="250"> | <img src="Screenshots/Nearby-Places.jpeg" width="250"> | <img src="Screenshots/AI-Assistant.jpeg" width="250"> |
+
+| Voice Assistant                                         |
+| ----------------------------------------------------- |
+| <img src="Screenshots/Voice-Assistant.jpeg" width="250"> |
 
 ---
 
@@ -180,11 +180,7 @@ Watch the complete application workflow below:
 | 📱 RouteSmart Application Demo |
 | ------------------------------ |
 
-Add your demo video link here.
-
-
-https://github.com/user-attachments/assets/66e652b0-b60e-4768-b60b-fc3ee695ec47
-
+https://github.com/user-attachments/assets/fee329ce-2eee-4a6d-bced-2914c9efd902
 
 ---
 
