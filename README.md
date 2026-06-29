@@ -161,7 +161,7 @@ The project was tested using:
 
 | Login Page                                         | Route                                        | Nearby Places                                         |
 | ----------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------ |
-| <img src="Screenshots/Login-Page.jpg" width="250"> | <img src="Screenshots/Route-Page.jpg" width="250"> | <img src="Screenshots/Nearby-Places.jpg" width="250"> |
+| <img src="Screenshots/Login-Page.jpeg" width="250"> | <img src="Screenshots/Route-Page.jpeg" width="250"> | <img src="Screenshots/Nearby-Places.jpeg" width="250"> |
 
 ---
 
