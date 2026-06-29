@@ -159,17 +159,9 @@ The project was tested using:
 
 ## 📷 Application Walkthrough
 
-| Splash Screen                                         | Login Page                                         | Home Dashboard                                         |
+| Login Page                                         | Route                                        | Nearby Places                                         |
 | ----------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------ |
-| <img src="Screenshots/Splash-Screen.jpg" width="250"> | <img src="Screenshots/Login-Page.jpg" width="250"> | <img src="Screenshots/Home-Dashboard.jpg" width="250"> |
-
-| Route Search                                         | Navigation Screen                                         | Nearby Places                                         |
-| ---------------------------------------------------- | --------------------------------------------------------- | ----------------------------------------------------- |
-| <img src="Screenshots/Route-Search.jpg" width="250"> | <img src="Screenshots/Navigation-Screen.jpg" width="250"> | <img src="Screenshots/Nearby-Places.jpg" width="250"> |
-
-| Voice Assistant                                         | Travel Chatbot                                         | Profile                                         |
-| ------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
-| <img src="Screenshots/Voice-Assistant.jpg" width="250"> | <img src="Screenshots/Travel-Chatbot.jpg" width="250"> | <img src="Screenshots/Profile.jpg" width="250"> |
+| <img src="Screenshots/Login-Page.jpg" width="250"> | <img src="Screenshots/Route-Page.jpg" width="250"> | <img src="Screenshots/Nearby-Places.jpg" width="250"> |
 
 ---
 
